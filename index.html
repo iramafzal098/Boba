@@ -19,18 +19,17 @@ body {
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 40px;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 35px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
   width: 90%;
-  max-width: 420px;
-  position: relative;
+  max-width: 430px;
 }
 
 button {
   margin: 8px;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -73,31 +72,26 @@ button:hover {
 
 <body>
 
-<div class="container" id="content">
-  <h2>Hey Bug 🐞💌</h2>
-  <p>I made this just for you...</p>
-  <button class="primary" onclick="start()">Open 😌</button>
-</div>
+<div class="container" id="content"></div>
 
 <script>
-
 let step = 0;
 
-function start() {
-  step = 1;
-  render();
-}
-
-function back() {
-  step--;
-  render();
-}
+render();
 
 function render() {
-  const content = document.getElementById("content");
+  const c = document.getElementById("content");
+
+  if (step === 0) {
+    c.innerHTML = `
+      <h2>Hey Mr Handsome Bug 🐞💌</h2>
+      <p>I made something special for you…</p>
+      <button class="primary" onclick="next()">Open 😌</button>
+    `;
+  }
 
   if (step === 1) {
-    content.innerHTML = `
+    c.innerHTML = `
       <h2>QnA Time 😏</h2>
       <p>Who is my favorite human?</p>
       <button class="primary" onclick="next()">Bug 🐞</button>
@@ -109,23 +103,23 @@ function render() {
   }
 
   if (step === 2) {
-    content.innerHTML = `
+    c.innerHTML = `
       <h2>Another one 💕</h2>
-      <p>Who makes my bad days better?</p>
+      <p>Who makes my days brighter?</p>
       <button class="primary" onclick="next()">Your smile 😊</button>
       <button class="secondary" onclick="next()">Your hugs 🤍</button>
-      <button class="secondary" onclick="next()">All of you 🥺</button>
+      <button class="secondary" onclick="next()">Everything about you 🥺</button>
       <br><br>
       <button class="back" onclick="back()">⬅️ Back</button>
     `;
   }
 
   if (step === 3) {
-    content.innerHTML = `
-      <h2>Okay last…</h2>
+    c.innerHTML = `
+      <h2>Almost there…</h2>
       <p>Who owns my heart?</p>
-      <button class="primary" onclick="next()">Me 😌</button>
-      <button class="secondary" onclick="next()">Bug 🐞</button>
+      <button class="primary" onclick="next()">Bug 🐞</button>
+      <button class="secondary" onclick="next()">Me 😌</button>
       <button class="secondary" onclick="next()">Both of us 💖</button>
       <br><br>
       <button class="back" onclick="back()">⬅️ Back</button>
@@ -133,8 +127,8 @@ function render() {
   }
 
   if (step === 4) {
-    content.innerHTML = `
-      <h2>Important question 💘</h2>
+    c.innerHTML = `
+      <h2>Important Question 💘</h2>
       <p style="font-size:20px;">Will you be my Valentine?</p>
       <button class="primary" onclick="yes()">YES 💖</button>
       <button class="secondary" onmouseover="run(this)">No 🙈</button>
@@ -149,5 +143,47 @@ function next() {
   render();
 }
 
+function back() {
+  step--;
+  render();
+}
+
 function yes() {
-  document.getElementById("content").innerHTML
+  document.getElementById("content").innerHTML = `
+    <h2>Hehe 😌💍</h2>
+    <p style="font-size:18px;">
+      So finally…<br><br>
+      you’re officially <b>booked</b> for every Valentine<br>
+      for your <b>whole life</b> 💖
+    </p>
+    <p>No cancellations allowed 🐞😌</p>
+    <button class="primary" onclick="restart()">Start Over 🔁</button>
+  `;
+  hearts();
+}
+
+function restart() {
+  step = 0;
+  render();
+}
+
+function run(btn) {
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
+}
+
+function hearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
