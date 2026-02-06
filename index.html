@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Someone Special! 💖</title>
+<title>For My Bug 💖</title>
 
 <style>
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
-  color: #fff;
+  color: white;
 }
 
 .container {
@@ -24,31 +24,49 @@ body {
   border-radius: 20px;
   backdrop-filter: blur(10px);
   width: 90%;
-  max-width: 400px;
+  max-width: 420px;
+  position: relative;
 }
 
 button {
-  margin: 10px;
+  margin: 8px;
   padding: 12px 20px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
   transition: 0.3s;
 }
 
 .primary {
-  background: #ff4b5c;
+  background: #ff2e63;
   color: white;
 }
 
 .secondary {
   background: white;
-  color: #ff4b5c;
+  color: #ff2e63;
+}
+
+.back {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+.heart {
+  position: fixed;
+  font-size: 20px;
+  animation: float 4s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
 }
 </style>
 </head>
@@ -56,52 +74,80 @@ button:hover {
 <body>
 
 <div class="container" id="content">
-  <h2>Hello handsome 💌</h2>
-  <p>Click below... QnA time 😌</p>
-  <button class="primary" onclick="startQna()">Click Me</button>
+  <h2>Hey Bug 🐞💌</h2>
+  <p>I made this just for you...</p>
+  <button class="primary" onclick="start()">Open 😌</button>
 </div>
 
 <script>
 
-function startQna() {
-  document.getElementById("content").innerHTML = `
-    <h2>Question 1 😏</h2>
-    <p>Who is the cutest person you know?</p>
-    <button class="primary" onclick="nextQna()">You 💖</button>
-  `;
+let step = 0;
+
+function start() {
+  step = 1;
+  render();
 }
 
-function nextQna() {
-  document.getElementById("content").innerHTML = `
-    <h2>Question 2 🥰</h2>
-    <p>Who makes your days better?</p>
-    <button class="primary" onclick="finalAsk()">You only 💕</button>
-  `;
+function back() {
+  step--;
+  render();
 }
 
-function finalAsk() {
-  document.getElementById("content").innerHTML = `
-    <h2>Okay last question...</h2>
-    <p style="font-size:20px;">Will you be my Valentine? 💘</p>
-    <button class="primary" onclick="yesAnswer()">YES 💖</button>
-    <button class="secondary" onmouseover="moveButton(this)">No 🙈</button>
-  `;
+function render() {
+  const content = document.getElementById("content");
+
+  if (step === 1) {
+    content.innerHTML = `
+      <h2>QnA Time 😏</h2>
+      <p>Who is my favorite human?</p>
+      <button class="primary" onclick="next()">Bug 🐞</button>
+      <button class="secondary" onclick="next()">You 🥰</button>
+      <button class="secondary" onclick="next()">Obviously me 😌</button>
+      <br><br>
+      <button class="back" onclick="back()">⬅️ Back</button>
+    `;
+  }
+
+  if (step === 2) {
+    content.innerHTML = `
+      <h2>Another one 💕</h2>
+      <p>Who makes my bad days better?</p>
+      <button class="primary" onclick="next()">Your smile 😊</button>
+      <button class="secondary" onclick="next()">Your hugs 🤍</button>
+      <button class="secondary" onclick="next()">All of you 🥺</button>
+      <br><br>
+      <button class="back" onclick="back()">⬅️ Back</button>
+    `;
+  }
+
+  if (step === 3) {
+    content.innerHTML = `
+      <h2>Okay last…</h2>
+      <p>Who owns my heart?</p>
+      <button class="primary" onclick="next()">Me 😌</button>
+      <button class="secondary" onclick="next()">Bug 🐞</button>
+      <button class="secondary" onclick="next()">Both of us 💖</button>
+      <br><br>
+      <button class="back" onclick="back()">⬅️ Back</button>
+    `;
+  }
+
+  if (step === 4) {
+    content.innerHTML = `
+      <h2>Important question 💘</h2>
+      <p style="font-size:20px;">Will you be my Valentine?</p>
+      <button class="primary" onclick="yes()">YES 💖</button>
+      <button class="secondary" onmouseover="run(this)">No 🙈</button>
+      <br><br>
+      <button class="back" onclick="back()">⬅️ Back</button>
+    `;
+  }
 }
 
-function yesAnswer() {
-  document.getElementById("content").innerHTML = `
-    <h2>Yayyyyy!!! 🥳💖</h2>
-    <p>I knew it 😌 Can't wait for our Valentine moment 💕</p>
-  `;
+function next() {
+  step++;
+  render();
 }
 
-function moveButton(button) {
-  button.style.position = "absolute";
-  button.style.top = Math.random() * 80 + "%";
-  button.style.left = Math.random() * 80 + "%";
-}
-
-</script>
-
-</body>
-</html>
+function yes() {
+  document.getElementById("content").innerHTML
