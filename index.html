@@ -72,6 +72,9 @@ button:hover {
 
 <body>
 
+<!-- Music container -->
+<div id="music"></div>
+
 <div class="container" id="content"></div>
 
 <script>
@@ -85,14 +88,14 @@ function render() {
   if (step === 0) {
     c.innerHTML = `
       <h2>Hey Mr Handsome Bug 🐞💌</h2>
-      <p>I made something special for you…</p>
+      <p>I have some questions to ask you 😌</p>
       <button class="primary" onclick="next()">Open 😌</button>
     `;
   }
 
   if (step === 1) {
     c.innerHTML = `
-      <h2>QnA Time 😏</h2>
+      <h2>QnA Time 😌</h2>
       <p>Who is my favorite human?</p>
       <button class="primary" onclick="next()">Bug 🐞</button>
       <button class="secondary" onclick="next()">You 🥰</button>
@@ -139,6 +142,7 @@ function render() {
 }
 
 function next() {
+  if (step === 0) playMusic(); // start song on first click
   step++;
   render();
 }
@@ -171,6 +175,20 @@ function run(btn) {
   btn.style.position = "absolute";
   btn.style.top = Math.random() * 80 + "%";
   btn.style.left = Math.random() * 80 + "%";
+}
+
+/* 🎵 YouTube Music */
+function playMusic() {
+  if (!document.getElementById("ytplayer")) {
+    const iframe = document.createElement("iframe");
+    iframe.id = "ytplayer";
+    iframe.width = "0";
+    iframe.height = "0";
+    iframe.src =
+      "https://www.youtube.com/embed/RYXUA32Dx4k?autoplay=1&loop=1&playlist=RYXUA32Dx4k";
+    iframe.allow = "autoplay";
+    document.getElementById("music").appendChild(iframe);
+  }
 }
 
 function hearts() {
