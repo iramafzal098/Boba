@@ -72,14 +72,12 @@ button:hover {
 
 <body>
 
-<!-- Music container -->
 <div id="music"></div>
 
 <div class="container" id="content"></div>
 
 <script>
 let step = 0;
-
 render();
 
 function render() {
@@ -95,7 +93,18 @@ function render() {
 
   if (step === 1) {
     c.innerHTML = `
-      <h2>QnA Time 🥰</h2>
+      <h2>One question first 😌🎵</h2>
+      <p>Do you wanna know what song reminds me of you?</p>
+      <button class="primary" onclick="playMusic(); next()">Yes 😌</button>
+      <button class="secondary" onclick="next()">Maybe later 🙈</button>
+      <br><br>
+      <button class="back" onclick="back()">⬅️ Back</button>
+    `;
+  }
+
+  if (step === 2) {
+    c.innerHTML = `
+      <h2>QnA Time 😌</h2>
       <p>Who is my favorite human?</p>
       <button class="primary" onclick="next()">Bug 🐞</button>
       <button class="secondary" onclick="next()">You 🥰</button>
@@ -105,7 +114,7 @@ function render() {
     `;
   }
 
-  if (step === 2) {
+  if (step === 3) {
     c.innerHTML = `
       <h2>Another one 💕</h2>
       <p>Who makes my days brighter?</p>
@@ -117,7 +126,7 @@ function render() {
     `;
   }
 
-  if (step === 3) {
+  if (step === 4) {
     c.innerHTML = `
       <h2>Almost there…</h2>
       <p>Who owns my heart?</p>
@@ -129,7 +138,7 @@ function render() {
     `;
   }
 
-  if (step === 4) {
+  if (step === 5) {
     c.innerHTML = `
       <h2>Important Question 💘</h2>
       <p style="font-size:20px;">Will you be my Valentine?</p>
@@ -142,7 +151,6 @@ function render() {
 }
 
 function next() {
-  if (step === 0) playMusic(); // start song on first click
   step++;
   render();
 }
@@ -177,7 +185,7 @@ function run(btn) {
   btn.style.left = Math.random() * 80 + "%";
 }
 
-/* 🎵 YouTube Music */
+/* 🎵 YouTube Song */
 function playMusic() {
   if (!document.getElementById("ytplayer")) {
     const iframe = document.createElement("iframe");
